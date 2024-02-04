@@ -15,22 +15,17 @@ javascript:(function() { var video = document.createElement('video'); video.src 
 </Script>
 
 <script>
-    function updateTitle(count) {
+    function updateTitleAndCountdown(count) {
         document.title = count;
+        count--;
+        if (count >= 0) {
+            setTimeout(function() {
+                updateTitleAndCountdown(count);
+            }, 1500);
+        }
     }
-    function startCountdown() {
-        let count = 5000;
-        const countdownInterval = setInterval(function () {
-            updateTitle(count);
-            count--;
-
-            if (count < 1) {
-                clearInterval(countdownInterval);
-            }
-        }, 1000);
-    }
-    window.onload = startCountdown;
-  
+    var initialCount = 5000;
+    updateTitleAndCountdown(initialCount);
 </script>
   
 </body>
